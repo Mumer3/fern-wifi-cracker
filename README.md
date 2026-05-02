@@ -1,4 +1,4 @@
-# 🔐 Fern WiFi Cracker Lab (Wireless Security Testing)
+# 🔐 Fern Wifi Cracker Lab (Wireless Security Testing)
 
 ![Platform](https://img.shields.io/badge/Platform-Linux-blue)
 ![Tool](https://img.shields.io/badge/Tool-Fern%20WiFi%20Cracker-green)
@@ -40,7 +40,7 @@
 - Select interface: `wlan0`
 - Enable Monitor Mode  
 
- `screenshots/screen2.png`
+![select_interface](screenshots/screen2.png)
  
 Verify using:
 ```bash
@@ -51,13 +51,13 @@ iwconfig
 Click Scan for Access Points
 Wait for results
 
-📷 Screenshot: screenshots/screen3.png
+![scan_networks](screenshots/screen3.png)
 
 ### 🔹 Step 4: Select WPA Networks
 Click on WPA Tab
 View available networks
 
-📷 Screenshot: screenshots/screen4.png
+![wpa_networks](screenshots/screen4.png)
 
 ### 🔹 Step 5: Choose Target
 
@@ -70,13 +70,13 @@ Power: -28
 Encryption: WPA
 WPS: Enabled
 
-📷 Screenshot: screenshots/screen5.png
+![chosse_target](screenshots/screen5.png)
 
 ### 🔹 Step 6: Load Wordlist
 Select wordlist (rockyou.txt)
 Detect connected clients
 
-📷 Screenshot: screenshots/screen6.png
+![load_wordlists](screenshots/screen6.png)
 
 ### 🔹 Step 7: Perform Attack
 Click WiFi Attack
@@ -85,13 +85,13 @@ Deauthenticate client
 Capture 4-Way Handshake
 Perform Brute Force Attack
 
-📷 Screenshot: screenshots/screen7.png
+![perform_attack](screenshots/screen7.png)
 
 ###🔹 Step 8: Retrieve Password
 Go to Key Database
 View cracked password
 
-📷 Screenshot: screenshots/screen8.png
+![Retrieve_Password](screenshots/screen8.png)
 
 🔎 Key Concepts
 Concept	Description
