@@ -32,7 +32,7 @@
 - Search: **Fern WiFi Cracker**
 - Launch the tool  
 
-📷 Screenshot: `screenshots/screen1.png`
+![home_page](screenshots/screen1.png)
 
 ---
 
