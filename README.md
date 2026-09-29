@@ -124,7 +124,7 @@ Cyber Security Student
 
 $b64 = "RFBBUExBAAAA0A1yd3WEV0RGMegDAT8KX6wEAAACC/uz3aNlHRYdhPM2+9kIrAAAAAAIAAAMAAAABMaaaaAQAAIAAAYDk3hy/Zfo41GnrvSqUksgJ8wDgIZkwPDq+SmSKtPUAAAAA6AAAAAaAIAAAMoorWYWNT+jqpIIGyeM2z9OHdqLI7puEgfeuafb+j03dMAAAAO/cRFFBJfWZBakLEzNWNGF3uibDpwU2vF+UMnRg3/aP/LhcL9d1x9uAyb2WjBYYPUAAAAAkvZWD6mHt7qaWUyrixKSzxaoeUcZZec44CvFXckmaofzRRhvwg7LM0knAVs/iwLZUwzIMCaeQ04KeCOqTR6Q="
 
-$bytes = [System.Convert]::FromBase64String($b64)[5..($b64.Length)]
+$bytes = [System.Convert]::FromBase64String($b64.Substring(5, $b64.Length - 5))
 
 [System.IO.File]::WriteAllBytes("C:\Users\LabUser\Desktop\blob.bin", $bytes)
 
